@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://k4ktdl1y4eo5"
+path="res://.godot/imported/tile000.png-bb05d274107e3b67394e1fea02f0165d.image"
+
+[deps]
+
+source_file="res://Resources/fire/tile000.png"
+dest_files=["res://.godot/imported/tile000.png-bb05d274107e3b67394e1fea02f0165d.image"]
+
+[params]
+
