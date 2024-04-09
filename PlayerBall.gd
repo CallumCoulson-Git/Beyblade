@@ -130,6 +130,8 @@ func _physics_process(_delta):
 		
 		houseKeeping()
 		
+	multiplayerHousekeeping()
+	
 	if get_contact_count() > 0:
 		var contactsSparks = get_colliding_bodies()
 		for contactSparks in contactsSparks:
@@ -191,7 +193,8 @@ func respawn():
 		set_rotation(Vector3(0,1,0))
 		staminaManagement(-100)
 	else:
-		get_parent().find_child("SpectatorCam").set_current(true)
+		if is_multiplayer_authority():
+			get_parent().find_child("SpectatorCam").set_current(true)
 
 func blockingVisual():
 	if isBlocking:
@@ -205,6 +208,11 @@ func houseKeeping():
 
 	if angular_velocity.y < 10 && linear_velocity.length() < 1:
 		mass = lerp(mass,mass * 0.2, 0.01)
+		
+func multiplayerHousekeeping():
+	pass
+#	var glow = (angular_velocity.y-35)/100
+#	$sphereMesh.get_active_material(0).set_emission(Color(glow, 0, 0, 1))
 	
 
 func _unhandled_input(event):	

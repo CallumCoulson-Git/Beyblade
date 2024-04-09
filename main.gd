@@ -11,6 +11,7 @@ func _on_host_pressed():
 	_add_player()
 	get_node("CanvasLayer/Host").disabled = true
 	get_node("CanvasLayer/Join").disabled = true
+	$CanvasLayer/Join/IP.visible = false
 	
 func _add_player(id = 1):
 	var player = player_scene.instantiate()
@@ -19,7 +20,11 @@ func _add_player(id = 1):
 	call_deferred("add_child", player)
 	
 func _on_join_pressed():
-	peer.create_client("localhost",135)
+	if $CanvasLayer/Join/IP.text != "":
+		peer.create_client(str($CanvasLayer/Join/IP.text),135)
+	else:
+		peer.create_client("localhost",135)
 	multiplayer.multiplayer_peer = peer
 	get_node("CanvasLayer/Host").disabled = true
 	get_node("CanvasLayer/Join").disabled = true
+	$CanvasLayer/Join/IP.visible = false
