@@ -126,14 +126,14 @@ func _physics_process(_delta):
 		
 		weightChange(WeightChange)
 		
-		blockingVisual()
+		
 		
 		houseKeeping()
 		
 	if get_contact_count() > 0:
 		var contactsSparks = get_colliding_bodies()
 		for contactSparks in contactsSparks:
-			if contactSparks.name == "PlayerRigidBody":
+			if contactSparks.name != "StaticBody3D":
 				var midPoint = lerp(position, contactSparks.position,0.5)
 				$sparkLocation/Sparks.emitting = true
 				$sparkLocation.set_global_position(midPoint)
@@ -145,6 +145,9 @@ func _physics_process(_delta):
 			else:
 				$sparkLocation/Sparks.emitting = false
 				
+
+	blockingVisual()
+	
 	if Lives > -1:
 		apply_torque(Vector3(0, RotationTorque * Channeling, 0))
 	
